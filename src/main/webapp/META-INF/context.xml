@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+  <Resource name="jdbc/inventorylite"
+            auth="Container"
+            type="javax.sql.DataSource"
+            factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+            driverClassName="com.mysql.cj.jdbc.Driver"
+            url="jdbc:mysql://127.0.0.1:3306/inventorylite?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"
+            username="root"
+            password="@SayanMySQL05"
+            initialSize="3"
+            maxTotal="20"
+            maxIdle="10"
+            maxWaitMillis="10000"/>
+</Context>

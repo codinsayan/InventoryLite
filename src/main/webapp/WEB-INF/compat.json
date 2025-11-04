@@ -1,0 +1,18 @@
+{
+  "sockets": [
+    "AM4",
+    "AM5",
+    "LGA1700"
+  ],
+  "gpu_lengths_mm": {
+    "RTX_4060": 240,
+    "RTX_4070": 285
+  },
+  "cases_max_gpu_mm": {
+    "MATX_CASE": 260,
+    "ATX_CASE": 320
+  },
+  "psu_rules": {
+    "margin_watts": 150
+  }
+}

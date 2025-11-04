@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <display-name>InventoryLite</display-name>
+    <resource-ref>
+        <description>Inventory DB</description>
+        <res-ref-name>jdbc/inventorylite</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- Your existing (unused by OrderServlet) params -->
+    <context-param>
+        <param-name>JDBC_URL</param-name>
+        <param-value>jdbc:mysql://localhost:3306/inventorylite?createDatabaseIfNotExist=true&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>JDBC_USER</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    <context-param>
+        <param-name>JDBC_PASS</param-name>
+        <param-value>@SayanMySQL05</param-value>
+    </context-param>
+
+    <!-- ✅ Params that OrderServlet actually reads (jdbc.*) -->
+    <context-param>
+        <param-name>jdbc.url</param-name>
+        <param-value>jdbc:mysql://127.0.0.1:3306/inventorylite?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC</param-value>
+    </context-param>
+    <context-param>
+        <param-name>jdbc.user</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    <context-param>
+        <param-name>jdbc.pass</param-name>
+        <param-value>@SayanMySQL05</param-value>
+    </context-param>
+
+    <welcome-file-list>
+        <welcome-file>products</welcome-file>
+    </welcome-file-list>
+
+    <!-- Auth servlets -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.ait.inventory.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SignupServlet</servlet-name>
+        <servlet-class>com.ait.inventory.SignupServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignupServlet</servlet-name>
+        <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.ait.inventory.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PasswordResetRequestServlet</servlet-name>
+        <servlet-class>com.ait.inventory.PasswordResetRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PasswordResetRequestServlet</servlet-name>
+        <url-pattern>/password-reset-request</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PasswordResetServlet</servlet-name>
+        <servlet-class>com.ait.inventory.PasswordResetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PasswordResetServlet</servlet-name>
+        <url-pattern>/password-reset</url-pattern>
+    </servlet-mapping>
+
+    <!-- Upgraded module servlets -->
+    <servlet>
+        <servlet-name>QrServlet</servlet-name>
+        <servlet-class>com.ait.inventory.QrServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QrServlet</servlet-name>
+        <url-pattern>/qr</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LabelServlet</servlet-name>
+        <servlet-class>com.ait.inventory.LabelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LabelServlet</servlet-name>
+        <url-pattern>/barcode</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RmaServlet</servlet-name>
+        <servlet-class>com.ait.inventory.RmaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RmaServlet</servlet-name>
+        <url-pattern>/rma</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TicketServlet</servlet-name>
+        <servlet-class>com.ait.inventory.TicketServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TicketServlet</servlet-name>
+        <url-pattern>/tickets</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PCBuilderServlet</servlet-name>
+        <servlet-class>com.ait.inventory.PCBuilderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PCBuilderServlet</servlet-name>
+        <url-pattern>/pc-builder</url-pattern>
+    </servlet-mapping>
+    <!-- Sales list (orders + sold items) -->
+    <servlet>
+    <servlet-name>SalesServlet</servlet-name>
+    <servlet-class>com.ait.inventory.SalesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>SalesServlet</servlet-name>
+    <url-pattern>/sales</url-pattern>
+    </servlet-mapping>
+
+    <!-- PDF invoice generator -->
+    <servlet>
+    <servlet-name>InvoicePdfServlet</servlet-name>
+    <servlet-class>com.ait.inventory.InvoicePdfServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>InvoicePdfServlet</servlet-name>
+    <url-pattern>/invoice.pdf</url-pattern>
+    </servlet-mapping>
+    <!-- Users page (list + change role) -->
+    <servlet>
+    <servlet-name>UserRoleServlet</servlet-name>
+    <servlet-class>com.ait.inventory.UserRoleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>UserRoleServlet</servlet-name>
+    <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+</web-app>
